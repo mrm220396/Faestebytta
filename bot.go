@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 	"time"
 
@@ -59,5 +58,5 @@ func main() {
 		go handleMessage(bot, update)
 	}
 
-	http.ListenAndServe("0.0.0.0:", nil)
+	// http.ListenAndServe("0.0.0.0:", nil)
 }
