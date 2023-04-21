@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -9,28 +8,6 @@ import (
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
-
-type Config struct {
-	BotToken string `json:"bot_token"`
-}
-
-func readConfigFile(filePath string) (Config, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return Config{}, err
-	}
-
-	defer file.Close()
-
-	decoder := json.NewDecoder(file)
-	var config Config
-	err = decoder.Decode(&config)
-
-	if err != nil {
-		return Config{}, err
-	}
-	return config, nil
-}
 
 func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 	kickConfig := tgbotapi.KickChatMemberConfig{
@@ -60,12 +37,7 @@ func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 
 func main() {
 
-	config, err := readConfigFile("settings/config.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	bot, err := tgbotapi.NewBotAPI(config.BotToken)
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
 	}
