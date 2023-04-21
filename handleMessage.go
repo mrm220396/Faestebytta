@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bots/pkg/quotes"
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
@@ -45,7 +46,9 @@ func handleMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		kick(bot, update.Message.Chat.ID, userID)
 
 		break
-
+	case strings.HasPrefix(update.Message.Text, "/quote"):
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, quotes.GetQuote())
+		bot.Send(msg)
 	default:
 		break
 	}
