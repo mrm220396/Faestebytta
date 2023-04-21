@@ -7,7 +7,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o faestebytta-bot cmd/faestebytta/main.go
+RUN go build -o faestebytta-bot cmd/faestebytta/*.go
 
 CMD ["./faestebytta-bot"]
 
