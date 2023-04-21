@@ -36,7 +36,7 @@ func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 }
 
 func main() {
-
+		
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
