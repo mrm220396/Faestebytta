@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
@@ -36,7 +37,7 @@ func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 }
 
 func main() {
-		
+
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_TOKEN"))
 	if err != nil {
 		log.Fatal(err)
@@ -57,4 +58,6 @@ func main() {
 		}
 		go handleMessage(bot, update)
 	}
+
+	http.ListenAndServe("0.0.0.0:", nil)
 }
