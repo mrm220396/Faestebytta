@@ -19,6 +19,8 @@ var quoteList = []string{
 	"Some men say they don’t wear their wedding band because it cuts off circulation. Well, that’s the point, isn’t it?",
 	"Advice to husbands: Try praising your wife now and then, even if it does startle her at first.",
 	"Here's not a democracy!!",
+	"What did the toaster say to the slice of bread? I want you inside me.",
+	 "Give it to me! Give it to me! she yelled. I'm so wet, give it to me now! She could scream all she wanted, but I was keeping the umbrella.", 
 }
 
 // GetQuote returns a random quote from the list of quotes

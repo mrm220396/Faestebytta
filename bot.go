@@ -4,36 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
-
-func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
-	kickConfig := tgbotapi.KickChatMemberConfig{
-		ChatMemberConfig: tgbotapi.ChatMemberConfig{
-			ChatID: chatID,
-			UserID: userID,
-		},
-		UntilDate: time.Now().Add(5 * time.Minute).Unix(), // Ban for 5 minutes
-	}
-
-	_, err := bot.KickChatMember(kickConfig)
-	if err != nil {
-		log.Fatalf("Invalid argument %v", err)
-	}
-
-	resp := fmt.Sprintf("User %d has been kicked!", userID)
-
-	msg := tgbotapi.NewMessage(chatID, resp)
-	bot.Send(msg)
-
-	// Sassy sentence
-	resp = "_This dude might have done shit_"
-	msg = tgbotapi.NewMessage(chatID, resp)
-	msg.ParseMode = "markdown"
-	bot.Send(msg)
-}
 
 func main() {
 
