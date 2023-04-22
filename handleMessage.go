@@ -41,12 +41,27 @@ func handleMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		break
 
 	case strings.HasPrefix(update.Message.Text, "/ban"):
+
+		if update.Message.ReplyToMessage == nil {
+			break
+		}
 		userID := update.Message.ReplyToMessage.From.ID
+
 		ban(bot, update.Message.Chat.ID, userID)
 
 	case strings.HasPrefix(update.Message.Text, "/quote"):
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, quotes.GetQuote())
 		bot.Send(msg)
+
+	case strings.HasPrefix(update.Message.Text, "/pin"):
+
+		if update.Message.ReplyToMessage == nil {
+			break
+		}
+		pinMessage(bot, update.Message.Chat.ID, update.Message.ReplyToMessage.MessageID, update.Message.ReplyToMessage.From.ID)
+
+	case strings.HasPrefix(update.Message.Text, "/unpin"):
+		unpinMessage(bot, update.Message.Chat.ID)
 
 	default:
 		break

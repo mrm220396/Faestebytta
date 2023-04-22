@@ -47,7 +47,7 @@ func kick(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 			ChatID: chatID,
 			UserID: userID,
 		},
-		UntilDate: time.Now().Add(1 * time.Minute).Unix(), // Ban for 5 minutes
+		UntilDate: time.Now().Add(1 * time.Minute).Unix(), // Ban for 1 minutes
 	}
 
 	_, err := bot.KickChatMember(kickConfig)
@@ -73,19 +73,65 @@ func ban(bot *tgbotapi.BotAPI, chatID int64, userID int) {
 			ChatID: chatID,
 			UserID: userID,
 		},
-		UntilDate: time.Now().Add(701280 * time.Hour).Unix(),
+		UntilDate: time.Now().Add(70000 * time.Hour).Unix(),
 	}
 
 	_, err := bot.KickChatMember(banConfig)
-
 	if err != nil {
-		fmt.Errorf("Errors were found %s", err)
+		log.Fatalf("Invalid argument %v", err)
 	}
 
 	msg := tgbotapi.NewMessage(chatID, "__Won't be back in 80 years__")
 
 	msg.ParseMode = "Markdown"
 	bot.Send(msg)
+}
+
+func unpinMessage(bot *tgbotapi.BotAPI, chatID int64) {
+	fmt.Printf("AAAAAAAA   %d", chatID)
+
+	unpinConfig := tgbotapi.UnpinChatMessageConfig{
+		ChatID: chatID,
+	}
+
+	_, err := bot.UnpinChatMessage(unpinConfig)
+	if err != nil {
+		fmt.Errorf("Something went wrong %s", err)
+	}
+}
+
+func pinMessage(bot *tgbotapi.BotAPI, chatID int64, messageID int, userID int) {
+	if allowedUser(bot, chatID, userID) {
+		pinMessage := tgbotapi.PinChatMessageConfig{
+			ChatID:              chatID,
+			MessageID:           messageID,
+			DisableNotification: true, // Won't notificate the users.
+		}
+
+		_, err := bot.PinChatMessage(pinMessage)
+		if err != nil {
+			fmt.Errorf("Bad Request %v", err)
+		}
+
+	}
+
+}
+
+func allowedUser(bot *tgbotapi.BotAPI, chatID int64, userID int) bool {
+	member := tgbotapi.ChatConfigWithUser{
+		ChatID: chatID,
+		UserID: userID,
+	}
+	admin, err := bot.GetChatMember(member)
+	if err != nil {
+		return false
+	}
+
+	if admin.IsAdministrator() || admin.IsCreator() {
+		return true
+	}
+
+	return false
 }
 
 func help(bot *tgbotapi.BotAPI, update tgbotapi.Update) {

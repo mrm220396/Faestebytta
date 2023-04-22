@@ -4,14 +4,13 @@ Faestebytta Bot is a Telegram bot that provides various features for its users. 
 
 ## Features
 
-- **Kick Users**: Kick a user from the group chat by mentioning their username.
-- **Ban Users**: Ban a user from the group chat by mentioning their username. 
-- **Unban Users**: Unban a user from the group chat by mentioning their username. [To be implemented]
-- **Pin Messages**: Pin a message in the group chat. [To be implemented]
-- **Unpin Messages**: Unpin a message in the group chat. [To be implemented]
-- **Get Chat ID**: Get the chat ID of the current chat. [To be implemented]
-- **Get User ID**: Get the user ID of a specific user in the chat. [To be implemented]
-
+- **Kick Users**: Kick a user from the group chat by Replying them.
+- **Ban Users**: Ban a user from the group chat by Replying them. 
+- **Unban Users**: Unban a user from the group chat by Replying them. [To be implemented]
+- **Pin Messages**: Pin a message in the group chat. [
+- **Unpin Messages**: Unpin a message in the group chat.
+- **Roll**: Roll a dice <Number>d<Number>
+- **Echo**: Repeat in a quotation what you've said
 ## Getting Started
 
 To use Faestebytta Bot, you need to have a Telegram account and join a group chat where the bot is added. Once you have joined the group chat, you can start using the available features by mentioning the bot in the chat.
