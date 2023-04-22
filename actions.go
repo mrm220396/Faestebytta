@@ -94,6 +94,7 @@ func unpinMessage(bot *tgbotapi.BotAPI, chatID int64) {
 		ChatID: chatID,
 	}
 
+
 	_, err := bot.UnpinChatMessage(unpinConfig)
 	if err != nil {
 		fmt.Errorf("Something went wrong %s", err)
